@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html ng-app="CoastalMarineFund">
+<head>
+    <title>Coastal Marine Fund - Vessels</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" /> 
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-animate.js"></script>
+    <script type="text/javascript" src="js/angular-aria.js"></script>
+    <script type="text/javascript" src="js/angular-messages.js"></script>
+    <script type="text/javascript" src="js/angular-material.js"></script>
+    <link rel="stylesheet" href="css/angular-material.css">
+
+    <!--Custom CSS & Js-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jQuery.scrollSpeed.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <script>
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "searching": false,
+            "lengthChange": false,
+            "info":     false
+        });
+    });
+    </script>
+</head>
+<body>
+<!--Header Starts Here-->    
+<header id="Index">
+   <div id="Home" layout="row">
+       <div flex class="loginbar">
+            <ul class="horizontal_icon" layout="row">
+                <li layout="column">
+                    <a href="payment.html">Make payment</a>
+                </li>
+                <li class="md-list-item-text" layout="column">
+                     <a href="javascript:void(0);" class="username" ng-click="toggle = ! toggle"><span>Sudhakar KT</span><span><i class="material-icons">account_circle</i><img class="downarrow" src="images/down-arrow.png" /></span></a>
+                </li>
+            </ul>
+            <div class="loginform userloged" ng-class="{'showlogin' : toggle}">
+                <ul>
+                    <li><a href="change-password.html"><span><i class="material-icons">lock_outline</i></span><span>Change Password</span></a></li>
+                    <li><a href="member-details.html"><span><i class="material-icons">person</i></span><span>Member Details</span></a></li>
+                    <li><a href="index.html"><span><i class="material-icons">power_settings_new</i></span><span>Log Out</span></a></li>
+                </ul>
+            </div>
+       </div>
+   </div>
+   <div layout="row" layout-align="center center">
+        <h1><a href="index.html"><span><img src="images/logo.jpg" /></span><span>Coastal Marine Fund</span></a></h1>
+    </div>
+    <div layout="row" layout-align="center center">    
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">About</a></li>
+            <li><a href="join.html">Join CMF</a></li>
+            <li><a href="#Contact">Contact</a></li>
+        </ul>
+   </div>
+</header>
+<!--Header Ends Here-->  
+
+<!--Wrapper Starts Here-->  
+<section>
+     <div layout="row">  
+        <div class="content innerpage">
+            <div class="home-content">
+                <h1>Membership Information</h1>
+                <p>Welcome to the Coastal Marine Fund members-only section. All members must have a good record for careful and able to maintenance of a vessel and agree to abide by the CMF By-Laws.</p>
+                <p>The following documents and forms are provided to assist you with the operation of your vessel(s) and for filing any necessary claims.</p>
+            </div>
+            <div layout="row" layout-sm="column" layout-xs="column">
+                <div flex="30">
+                    <div layout="row">
+                        <a href="payment-due.html" flex class="paymentbox bluebox greybox">
+                            <h2>Payment Due</h2>
+                            <h1>$308.00</h1>
+                            <p>Due in 30 Days</p>
+                        </a> 
+                    </div>
+                    <div layout="row">
+                        <a href="payment-history.html" flex class="paymentbox bluebox ">
+                            <h2>Payment History</h2>
+                            <h1>10</h1>
+                        </a>
+                    </div>
+                    <div layout="row">
+                        <a href="vessel.html" flex class="paymentbox bluebox">
+                            <h2>Vessel</h2>
+                            <h1>2</h1>
+                        </a>
+                    </div>
+                    <div layout="row">
+                        <a href="claim.html" flex class="paymentbox bluebox">
+                            <h1>Claim Forms</h1>
+                        </a>
+                    </div>
+                </div>
+                <div flex="70" ng-controller="accordCtrl">
+                    <div ng-repeat="(index,accordion) in accordions" >
+                    <h3 class="accord-head" ng-class="accordion.isActive==true?'active':''" ng-click="accordion.isActive==true?accordion.isActive=false:accordion.isActive=true">{{accordion.name}}</h3>
+                    <div id="accordion{{index}}" layout-padding ng-class="accordion.isActive==true?'show-content':''" class="accordion-cont">
+                        <h2 class="tableheader">Payment Due</h2>
+                        <div flex class="tablecontainer payment-table">
+                            <table id="example" class="table" cellspacing="0" width="100%">
+                                <thead>
+                                     <tr>
+                                        <th>Vessel Name</th>
+                                        <th class="text-center">Invoice No.</th>
+                                        <th class="text-center">Due Date</th>
+                                        <th class="text-right">Invoice Amount</th>
+                                        <th class="text-right">Balance Amount</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$258.36</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">LLC Name</td>
+                                        <td class="text-center">895230012</td>
+                                        <td class="text-center">10/27/2017</td>
+                                        <td class="text-right">$300.26</td>
+                                        <td class="text-right">$2500.36</td>
+                                        <td class="text-center"><a href="javascript:void(0);" class="md-raised md-primary md-button md-ink-ripple pay-vessel">Pay</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- <ul>
+                            <li ng-repeat="x in accordion.SubItem" class="download-claim">{{x}}</li>
+                        </ul> -->
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</section>
+<!--Wrapper Ends Here-->  
+
+<!--Footer Starts Here-->  
+<footer>
+    <div id="Contact" layout="row" class="contact-us">
+        <div class="content">
+            <div layout="row" layout-xs="column">
+                <div flex="70">
+                   <h2>Contact Us</h2>
+                    <div layout="row" layout-sm="column" layout-xs="column">
+                        <div flex>
+                            <ul class="address">
+                                <li>Coastal Marine Fund</li>
+                                <li>PO BOX 305</li>
+                                <li>Edmonds, WA 98020</li>
+                                <li><span><i class="material-icons">phone</i></span><span> (206) 428-9800</span></li>
+                                <li><span><i class="material-icons">print</i></span><span>(206) 547-0520</span></li>
+                                <li><span><i class="material-icons">mail</i></span><span><a href="mailto:info@coastalmarinefund.com">info@coastalmarinefund.com</a></span></li>
+                            </ul>
+                        </div>
+                        <div flex>
+                            <ul class="address">
+                                <li>Seattle Office Location</li>
+                                <li>4055 21st Ave W, Suite 202</li>
+                                <li>Seattle, WA 98199</li>
+                                <li class="socialicons"><span><a href="https://www.facebook.com/" target="_blank"><img src="images/facebook.png" /></a></span><span><a href="twitter.com" target="_blank"><img src="images/twitter.png" /></a></span><span><a href="https://plus.google.com/" target="_blank"><img src="images/google-plus.png" /></a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>    
+                <div flex="30">
+                    <div flex>
+                        <h2>Locate Us</h2>
+                        <!-- <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+                        <div style='overflow:hidden;height:300px;width:100%;'>
+                            <div id='gmap_canvas' style='height:440px;width:100%;'></div>
+                            <div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div>
+                            <div><small><a href="https://www.autohuren.world/">SUV</a></small></div>
+                            <style>
+                                #gmap_canvas img {
+                                    max-width: none!important;
+                                    background: none!important
+                                }
+                            </style>
+                        </div>
+                        <script type='text/javascript'>
+                            function init_map() {
+                                var myOptions = {
+                                    zoom: 10,
+                                    center: new google.maps.LatLng(13.024588963770704, 80.19715412763662),
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                };
+                                map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                                marker = new google.maps.Marker({
+                                    map: map,
+                                    position: new google.maps.LatLng(13.024588963770704, 80.19715412763662)
+                                });
+                                infowindow = new google.maps.InfoWindow({
+                                    content: '<strong>Kathipara Bridge</strong><br>Chennai Theni Hwy Rajeswari colony, St Thomas Mount Chennai, Tamil Nadu 600032<br>'
+                                });
+                                google.maps.event.addListener(marker, 'click', function() {
+                                    infowindow.open(map, marker);
+                                });
+                                infowindow.open(map, marker);
+                            }
+                            google.maps.event.addDomListener(window, 'load', init_map);
+                        </script> -->
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <div layout="row" layout-align="center center">
+        <p class="copyright-text">&copy; 2017 Coastal Marine Fund</p>
+    </div>
+</footer>
+<div class="scrolltotop">
+    <a href="#Index"><img src="images/icon-scroll-to-top.png" /></a>
+</div>
+<!--Footer Ends Here--> 
+
+<script type="text/javascript">    
+    var classApp = angular.module('CoastalMarineFund', ['ngMaterial']);
+    classApp.controller('accordCtrl', function ($scope) {
+
+        $scope.accordions=[{
+            "name":"Vessel 1",
+            "SubItem":["Vessles","Opearators"]
+        },
+        {
+            "name":"Vessel 2",
+            "SubItem":["Vessles1","Opearators1"]
+        },
+        ];
+        $scope.setActiveFlag=function (itemIndex) {
+            for (var i = 0;i<scope.accordions.length;i++) {
+                if(i!=itemIndex)
+                {
+                  $scope.accordions[i].isActive=false    
+                }
+            }
+        }
+        $scope.isActive = false;
+        $scope.activeButton = function() {
+        $scope.isActive = !$scope.isActive;
+      }  
+    });
+</script>
+</body>
+</html>

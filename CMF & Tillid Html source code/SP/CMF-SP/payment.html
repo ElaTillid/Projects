@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html ng-app="CoastalMarineFund">
+<head>
+    <title>Coastal Marine Fund - Make Payment</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png" /> 
+    <script type="text/javascript" src="js/angular.js"></script>
+    <script type="text/javascript" src="js/angular-animate.js"></script>
+    <script type="text/javascript" src="js/angular-aria.js"></script>
+    <script type="text/javascript" src="js/angular-messages.js"></script>
+    <script type="text/javascript" src="js/angular-material.js"></script>
+    <link rel="stylesheet" href="css/angular-material.css">
+
+    <!--Custom CSS & Js-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jQuery.scrollSpeed.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<!--Header Starts Here-->    
+<header id="Index">
+   <div id="Home" layout="row">
+       <div flex class="loginbar">
+            <ul class="horizontal_icon" layout="row">
+                <li layout="column">
+                    <a href="payment.html">Make payment</a>
+                </li>
+                <li class="md-list-item-text" layout="column">
+                    <a href="javascript:void(0);" class="username" ng-click="toggle = ! toggle"><span>Sudhakar KT</span><span><i class="material-icons">account_circle</i></span></a>
+                </li>
+            </ul>
+            <div class="loginform userloged" ng-class="{'showlogin' : toggle}">
+                <ul>
+                    <li><a href="change-password.html"><span><i class="material-icons">lock_outline</i></span><span>Change Password</span></a></li>
+                    <li><a href="member-details.html"><span><i class="material-icons">person</i></span><span>Member Details</span></a></li>
+                    <li><a href="index.html"><span><i class="material-icons">power_settings_new</i></span><span>Log Out</span></a></li>
+                </ul>
+            </div>
+       </div>
+   </div>
+   <div layout="row" layout-align="center center">
+        <h1><a href="index.html"><span><img src="images/logo.jpg" /></span><span>Coastal Marine Fund</span></a></h1>
+    </div>
+    <div layout="row" layout-align="center center">    
+        <ul class="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html">About</a></li>
+            <li><a href="join.html">Join CMF</a></li>
+            <li><a href="#Contact">Contact</a></li>
+        </ul>
+   </div>
+</header>
+<!--Header Ends Here-->  
+
+<!--Wrapper Starts Here-->  
+<section>
+     <div layout="row">  
+        <div class="content innerpage">
+            <div class="home-content text-left">
+                <p class="mbot-0 text-center joincmftextleft">If you would like to make a credit card payment through our website, please click the link below and enter the required information. Your information will be private and secure.</p>
+                <p class="mbot-0 text-center joincmftextleft">You may make a payment in any amount. Once you clock below, please enter amount you wish to pay along with your other information.</p>
+                <p class="mbot-0 text-center joincmftextleft">Thank you!</p>
+                <div class="page-content">
+                <form action="" method="POST" id="payment-form">
+                    <div class="form-container">
+                        <h3 class="payamount">Balance Amount : $6,000.00</h3>
+                        <div flex="90" layout="row" class="mleft5 mright5">
+                            <md-input-container flex="" class="mright5 md-input-has-value">
+                                <label class="md-required">First Name</label>
+                                <input id="Response_FirstName" maxlength="50" n type="text" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                            <md-input-container flex="" class="mleft5 md-input-has-value">
+                                <label class="md-required">Last Name</label>
+                                <input id="Response_LastName" maxlength="50" name="Response.LastName" required="required" type="text" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+                        <div flex="90" layout="row" class="mleft5 mright5">
+                            <md-input-container flex="" class="mright5 md-input-has-value">
+                                <label class="md-required" for="Response_StripeEmail">Email</label>
+                                <input id="Response_StripeEmail" name="Response.StripeEmail" required="readonly" type="text" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                            <md-input-container flex="" class="mleft5 md-input-has-value">
+                                <label class="md-required" for="Response_VesselName">Vessel Name</label>
+                                <input id="Response_VesselName" name="Response.VesselName" type="text" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+                        <div flex="90" layout="row" class="mleft5 mright5">
+                            <md-input-container flex="" class="mright5 md-input-has-value">
+                                <label class="md-required"  for="input_4">Invoice #</label>
+                                <input class="md-input" id="input_4"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                            <md-input-container flex="" class="mleft5 md-input-has-value">
+                                <label class="md-required" for="PaymentAmount">Payment Amount ($)</label>
+                                <input id="PaymentAmount" required="" class="md-input"><div class="md-errors-spacer"></div>
+                                <span class="field-validation-error processlaert">A 2.95% + 30¢ processing charge will be added to this price.</span>
+                            </md-input-container>
+                        </div>
+                        <div flex="90" layout="row" class="mleft5 mright5">
+                            <md-input-container flex="" class="mright5 mdProFee md-input-has-value">
+                                <label class="md-required" for="ProcessingFee">Processing Fee ($)</label>
+                                <input id="ProcessingFee" required="" name="ProcessingFee" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                            <md-input-container flex="" class="mleft5 mdTotalAmt md-input-has-value">
+                                <label class="md-required" for="TotalAmount">Total Amount ($)</label>
+                                <input id="TotalAmount" required="" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    <div class="form-container">
+                        <h3 class="creditcard">Debit / Credit Card<span><img src="images/card-amex.png"><img src="images/card-discover.png"><img src="images/card-visa.png"><img src="images/card-master.png"></span></h3>
+                        <div layout="row" layout-xs="column" class="mleft5 mright5">
+                            <md-input-container flex class="mright5">
+                                <label class="md-required" for="CardNumber">Card Number</label>
+                                <input id="CardNumber" required="" name="cardnumber" maxlength="16" ng-model="project.CardNumber" class="ng-pristine ng-untouched md-input ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" aria-invalid="true"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <label class="md-required"  for="CardHolderName">Card Holder Name</label>
+                                <input id="CardHolderName" maxlength="50" name="CardHolderName" type="text" value="" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+                    
+
+                        <div layout="row" layout-xs="column">
+                            <div flex="90" layout="row" class="mleft5 mright5">
+                                <md-input-container flex="30">
+                                    <label>Month</label>
+                                   <md-select name="ccyear" ng-model="project.month" required>
+                                        <md-option value="Jan">Jan</md-option>
+                                        <md-option value="Feb">Feb</md-option>
+                                        <md-option value="Marc">Marc</md-option>
+                                        <md-option value="Apr">Apr</md-option>
+                                        <md-option value="May">May</md-option>
+                                        <md-option value="Jun">Jun</md-option>
+                                        <md-option value="Jul">Jul</md-option>
+                                        <md-option value="Aug">Aug</md-option>
+                                        <md-option value="Sep">Sep</md-option>
+                                        <md-option value="Oct">Oct</md-option>
+                                        <md-option value="Nov">Nov</md-option>
+                                        <md-option value="Dec">Dec</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex="30" class="mleft5 mright5">
+                                    <label>Year</label>
+                                    <md-select name="ccyear" ng-model="project.ccyear" required>
+                                        <md-option value="2009">2009</md-option>
+                                        <md-option value="2010">2010</md-option>
+                                        <md-option value="2011">2011</md-option>
+                                        <md-option value="2012">2012</md-option>
+                                        <md-option value="2013">2013</md-option>
+                                        <md-option value="2014">2014</md-option>
+                                        <md-option value="2015">2015</md-option>
+                                        <md-option value="2016">2016</md-option>
+                                        <md-option value="2017">2017</md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex="30" class="sec-code">
+                                    <label>Security Code</label>
+                                    <input required name="securitycode" ng-model="project.securitycode">
+                                </md-input-container>
+                            </div>
+                        </div>
+
+                        <div layout="row" layout-xs="column" class="mleft5 mright5">
+                            <md-input-container flex="" class="mright5">
+                                <label class="md-required" for="Address1">Address 1</label>
+                                <input id="Address1" maxlength="500" name="Address1" ng-model="project.Address1" required="required" type="text" value="" class="ng-pristine ng-untouched md-input ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" aria-invalid="true"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+
+                            <md-input-container flex>
+                                <label class="md-required" for="Address2">Address 2</label>
+                                <input id="Address2" maxlength="500" name="Address2" type="text" value="" class="md-input"><div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+
+                    <div layout="row" layout-xs="column" class="mleft5 mright5">
+                        <md-input-container id="country" flex="" class="mright5" required="">
+                            <label class="md-required md-placeholder" for="country">Country</label>
+                            <md-select name="ccyear" ng-model="project.ccyear" required>
+                                <md-option value="USA">USA</md-option>
+                                <md-option value="Canada">Canada</md-option>
+                                <md-option value="Mexico">Mexico</md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container id="state" flex="" class="mright5" required="">
+                            <label class="md-required md-placeholder" for="state">State</label>
+                            <md-select name="ccyear" ng-model="project.ccyear" required>
+                                <md-option value="USA">USA</md-option>
+                                <md-option value="Canada">Canada</md-option>
+                                <md-option value="Mexico">Mexico</md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container flex="" class="mright5">
+                            <label class="md-required" for="City">City</label>
+                            <input id="City" maxlength="500" name="City" ng-model="project.City" required="required" type="text" value="" class="ng-pristine ng-untouched md-input ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" aria-invalid="true"><div class="md-errors-spacer"></div>
+                        </md-input-container>
+                        <md-input-container flex="">
+                            <label class="md-required" for="Pincode">Zipcode</label>
+                            <input id="Pincode" maxlength="5" name="Pincode" ng-model="project.Pincode" required="required" type="text" value="" class="ng-pristine ng-untouched md-input ng-empty ng-invalid ng-invalid-required ng-valid-maxlength" aria-invalid="true"><div class="md-errors-spacer"></div>
+                        </md-input-container>
+                    </div>
+                        <div flex="90" layout="row" class="mleft5 mright5">
+                            <md-input-container flex="">
+                                <label class="md-required" for="Comments">Comments</label>
+                                <textarea cols="20" id="Comments" maxlength="500" name="Comments" rows="2" class="md-input" style="height: 54px;"></textarea>
+                                <div class="md-resize-handle" style="touch-action: pan-y;"></div>
+                                <div class="md-errors-spacer"></div>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div layout="row" layout-sm="column" layout-xs="column" class="vesselheadcontainer mleft5 mright5">
+                        <div flex="" class="text-right">
+                            <input type="submit" class="md-raised md-primary md-button md-ink-ripple" value="Submit">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>  
+    </div>
+</section>
+<!--Wrapper Ends Here-->  
+
+<!--Footer Starts Here-->  
+<footer>
+    <div id="Contact" layout="row" class="contact-us">
+        <div class="content">
+            <div layout="row" layout-xs="column">
+                <div flex="70">
+                   <h2>Contact Us</h2>
+                    <div layout="row" layout-sm="column" layout-xs="column">
+                        <div flex>
+                            <ul class="address">
+                                <li>Coastal Marine Fund</li>
+                                <li>PO BOX 305</li>
+                                <li>Edmonds, WA 98020</li>
+                                <li><span><i class="material-icons">phone</i></span><span> (206) 428-9800</span></li>
+                                <li><span><i class="material-icons">print</i></span><span>(206) 547-0520</span></li>
+                                <li><span><i class="material-icons">mail</i></span><span><a href="mailto:info@coastalmarinefund.com">info@coastalmarinefund.com</a></span></li>
+                            </ul>
+                        </div>
+                        <div flex>
+                            <ul class="address">
+                                <li>Seattle Office Location</li>
+                                <li>4055 21st Ave W, Suite 202</li>
+                                <li>Seattle, WA 98199</li>
+                                <li class="socialicons"><span><a href="https://www.facebook.com/" target="_blank"><img src="images/facebook.png" /></a></span><span><a href="twitter.com" target="_blank"><img src="images/twitter.png" /></a></span><span><a href="https://plus.google.com/" target="_blank"><img src="images/google-plus.png" /></a></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>    
+                <div flex="30">
+                    <div flex>
+                        <h2>Locate Us</h2>
+                        <!-- <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+                        <div style='overflow:hidden;height:300px;width:100%;'>
+                            <div id='gmap_canvas' style='height:440px;width:100%;'></div>
+                            <div><small><a href="http://embedgooglemaps.com">embed google maps</a></small></div>
+                            <div><small><a href="https://www.autohuren.world/">SUV</a></small></div>
+                            <style>
+                                #gmap_canvas img {
+                                    max-width: none!important;
+                                    background: none!important
+                                }
+                            </style>
+                        </div>
+                        <script type='text/javascript'>
+                            function init_map() {
+                                var myOptions = {
+                                    zoom: 10,
+                                    center: new google.maps.LatLng(13.024588963770704, 80.19715412763662),
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                };
+                                map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+                                marker = new google.maps.Marker({
+                                    map: map,
+                                    position: new google.maps.LatLng(13.024588963770704, 80.19715412763662)
+                                });
+                                infowindow = new google.maps.InfoWindow({
+                                    content: '<strong>Kathipara Bridge</strong><br>Chennai Theni Hwy Rajeswari colony, St Thomas Mount Chennai, Tamil Nadu 600032<br>'
+                                });
+                                google.maps.event.addListener(marker, 'click', function() {
+                                    infowindow.open(map, marker);
+                                });
+                                infowindow.open(map, marker);
+                            }
+                            google.maps.event.addDomListener(window, 'load', init_map);
+                        </script> -->
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <div layout="row" layout-align="center center">
+        <p class="copyright-text">&copy; 2017 Coastal Marine Fund</p>
+    </div>
+</footer>
+<div class="scrolltotop">
+    <a href="#Index"><img src="images/icon-scroll-to-top.png" /></a>
+</div>
+<!--Footer Ends Here--> 
+
+<script type="text/javascript">    
+    var classApp = angular.module('CoastalMarineFund', ['ngMaterial']);
+</script>
+</body>
+</html>
